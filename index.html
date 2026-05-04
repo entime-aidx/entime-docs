@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Entime 社内ドキュメント</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f8fa;
+      --card: #ffffff;
+      --primary: #0f4c75;
+      --primary-light: #3282b8;
+      --accent: #00a884;
+      --text: #1a202c;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 3rem 1rem;
+      line-height: 1.7;
+    }
+    .container { max-width: 800px; margin: 0 auto; }
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: white;
+      padding: 2.5rem 2rem;
+      border-radius: 16px;
+      margin-bottom: 2rem;
+    }
+    .label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      opacity: 0.85;
+      margin-bottom: 0.5rem;
+    }
+    h1 { font-size: 1.75rem; }
+    .meta { margin-top: 0.75rem; font-size: 0.9rem; opacity: 0.9; }
+    .section {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1rem;
+      border: 1px solid var(--border);
+    }
+    h2 {
+      font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+      font-size: 1.1rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--accent);
+    }
+    .doc-item {
+      display: block;
+      padding: 1rem 1.25rem;
+      margin-bottom: 0.6rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.15s;
+    }
+    .doc-item:hover {
+      border-color: var(--accent);
+      transform: translateX(2px);
+      box-shadow: 0 2px 8px rgba(0,168,132,0.1);
+    }
+    .doc-title {
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+    }
+    .doc-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .empty {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-style: italic;
+    }
+    footer {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="label">Internal Documentation</div>
+      <h1>株式会社Entime 社内ドキュメント</h1>
+      <p class="meta">業務フロー・社内手順・関係先向け説明資料</p>
+    </header>
+
+    <div class="section">
+      <h2>経理・税務</h2>
+      <a href="keiri-flow-tax-accountant.html" class="doc-item">
+        <div class="doc-title">経理フローの変更について（税理士向けご説明）</div>
+        <div class="doc-meta">2026-05-04 更新 ｜ Before/After フロー図つき</div>
+      </a>
+    </div>
+
+    <div class="section">
+      <h2>その他</h2>
+      <p class="empty">今後追加されます。</p>
+    </div>
+
+    <footer>
+      <div>株式会社Entime</div>
+      <div>本ページは関係者向けの内部資料です</div>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>経理フローの変更について（税理士向けご説明）</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f8fa;
+      --card: #ffffff;
+      --primary: #0f4c75;
+      --primary-light: #3282b8;
+      --accent: #00a884;
+      --accent-light: #e0f7f1;
+      --warn: #d97706;
+      --warn-light: #fef3e2;
+      --danger: #dc2626;
+      --text: #1a202c;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --old: #94a3b8;
+      --old-bg: #f1f5f9;
+      --new: #00a884;
+      --new-bg: #e0f7f1;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 960px; margin: 0 auto; }
+
+    header.cover {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: white;
+      padding: 2.5rem 2rem;
+      border-radius: 16px;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 30px rgba(15, 76, 117, 0.15);
+    }
+    header.cover .label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.85;
+      margin-bottom: 0.75rem;
+    }
+    header.cover h1 {
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin-bottom: 1rem;
+    }
+    header.cover .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.9rem;
+      opacity: 0.95;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.3);
+    }
+    header.cover .meta span { display: inline-flex; align-items: center; gap: 0.4rem; }
+    header.cover .meta strong { font-weight: 600; opacity: 0.85; }
+
+    section.block {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 1.25rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    section.block h2 {
+      font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    section.block h2 .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem; height: 2rem;
+      background: var(--accent);
+      color: white;
+      border-radius: 50%;
+      font-size: 0.95rem;
+      font-weight: 700;
+      font-family: 'Outfit', sans-serif;
+    }
+    section.block h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 1.25rem 0 0.75rem;
+    }
+    section.block p { margin-bottom: 0.5rem; font-size: 0.95rem; }
+
+    /* 変化3点 カード */
+    .change-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+    @media (max-width: 720px) { .change-cards { grid-template-columns: 1fr; } }
+    .change-card {
+      background: var(--accent-light);
+      border-left: 4px solid var(--accent);
+      padding: 1.25rem;
+      border-radius: 8px;
+    }
+    .change-card .icon {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .change-card h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.6rem;
+    }
+    .change-card .ba {
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+    .change-card .ba .old { color: var(--text-muted); text-decoration: line-through; }
+    .change-card .ba .new { color: var(--accent); font-weight: 600; }
+
+    /* Before/After フロー図 */
+    .flow-comparison {
+      display: grid;
+      grid-template-columns: 1fr 60px 1fr;
+      gap: 1rem;
+      align-items: stretch;
+      margin: 1rem 0;
+    }
+    @media (max-width: 800px) {
+      .flow-comparison { grid-template-columns: 1fr; }
+      .flow-comparison .arrow-mid { display: none; }
+    }
+    .flow-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .flow-col .col-header {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      text-align: center;
+      padding: 0.75rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+    }
+    .flow-col.old .col-header { background: var(--old-bg); color: var(--old); }
+    .flow-col.new .col-header { background: var(--new-bg); color: var(--new); }
+    .flow-step {
+      padding: 0.7rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      position: relative;
+    }
+    .flow-col.old .flow-step {
+      background: var(--old-bg);
+      color: var(--text);
+      border-left: 3px solid var(--old);
+    }
+    .flow-col.new .flow-step {
+      background: var(--new-bg);
+      color: var(--text);
+      border-left: 3px solid var(--new);
+    }
+    .flow-step .num {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      margin-right: 0.4rem;
+    }
+    .flow-col.old .flow-step .num { color: var(--old); }
+    .flow-col.new .flow-step .num { color: var(--new); }
+    .flow-step.removed {
+      background: #fef2f2;
+      color: #94a3b8;
+      text-decoration: line-through;
+      border-left-color: #fca5a5;
+    }
+    .flow-step.kept {
+      background: #f1f5f9;
+      border-left-color: #94a3b8;
+    }
+    .flow-step.upgraded {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border-left-color: var(--warn);
+      font-weight: 600;
+    }
+    .arrow-mid {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: var(--accent);
+      font-weight: 800;
+    }
+    .flow-section-label {
+      background: var(--primary);
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin: 0.4rem 0 0.3rem;
+      text-align: center;
+    }
+    .flow-col.old .flow-section-label { background: var(--old); }
+    .flow-col.new .flow-section-label { background: var(--accent); }
+
+    /* 比較表 */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin: 0.5rem 0;
+    }
+    table th {
+      background: var(--primary);
+      color: white;
+      padding: 0.7rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    table td {
+      padding: 0.7rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    table tr:nth-child(even) td { background: #f9fafb; }
+    table .check { color: var(--accent); font-weight: 700; }
+    table .cross { color: var(--danger); font-weight: 700; }
+    table .neutral { color: var(--text-muted); }
+    table strong.new-label {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* メリットカード */
+    .merit-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    @media (max-width: 720px) { .merit-grid { grid-template-columns: 1fr; } }
+    .merit-card {
+      padding: 1.25rem;
+      background: linear-gradient(135deg, #ffffff 0%, var(--accent-light) 100%);
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+    }
+    .merit-card .check-icon {
+      display: inline-block;
+      width: 1.5rem;
+      height: 1.5rem;
+      background: var(--accent);
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 1.5rem;
+      font-size: 0.85rem;
+      margin-right: 0.5rem;
+      font-weight: 700;
+    }
+    .merit-card h4 {
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    .merit-card p { font-size: 0.88rem; color: var(--text); }
+
+    /* 対応お願いカード */
+    .ask-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    @media (max-width: 720px) { .ask-grid { grid-template-columns: 1fr; } }
+    .ask-card {
+      background: var(--warn-light);
+      border-left: 4px solid var(--warn);
+      padding: 1.25rem;
+      border-radius: 8px;
+    }
+    .ask-card .step-num {
+      font-family: 'Outfit', sans-serif;
+      display: inline-block;
+      background: var(--warn);
+      color: white;
+      width: 1.75rem;
+      height: 1.75rem;
+      line-height: 1.75rem;
+      text-align: center;
+      border-radius: 50%;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+    .ask-card h4 {
+      font-size: 1rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    .ask-card p { font-size: 0.85rem; color: var(--text); }
+
+    /* タイムライン */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 0.6rem;
+      top: 0.5rem;
+      bottom: 0.5rem;
+      width: 2px;
+      background: var(--accent);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 1rem;
+      padding-left: 1rem;
+    }
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -1.45rem;
+      top: 0.4rem;
+      width: 0.85rem;
+      height: 0.85rem;
+      background: var(--accent);
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+    .timeline-item h4 {
+      font-size: 1rem;
+      color: var(--primary);
+      margin-bottom: 0.2rem;
+    }
+    .timeline-item p { font-size: 0.9rem; color: var(--text-muted); }
+
+    /* 既知課題 */
+    .alert-box {
+      background: var(--warn-light);
+      border-left: 4px solid var(--warn);
+      padding: 1rem 1.25rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
+    .alert-box h4 {
+      font-size: 0.95rem;
+      color: var(--warn);
+      margin-bottom: 0.5rem;
+    }
+    .alert-box p { font-size: 0.88rem; color: var(--text); }
+    .alert-box .quote {
+      background: white;
+      padding: 0.75rem;
+      border-radius: 4px;
+      margin: 0.5rem 0;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border-left: 2px solid var(--warn);
+    }
+
+    /* 連絡先 */
+    .contact-table {
+      background: var(--accent-light);
+      padding: 1rem;
+      border-radius: 8px;
+    }
+    .contact-row {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 1rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(0,168,132,0.2);
+      font-size: 0.9rem;
+    }
+    .contact-row:last-child { border-bottom: none; }
+    .contact-row .label { font-weight: 600; color: var(--primary); }
+
+    footer {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+    footer .company {
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.2rem;
+      font-size: 0.95rem;
+    }
+
+    /* 印刷対応 */
+    @media print {
+      body { background: white; padding: 0; }
+      header.cover { box-shadow: none; }
+      section.block { box-shadow: none; page-break-inside: avoid; }
+      .change-cards, .merit-grid, .ask-grid, .flow-comparison { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header class="cover">
+      <div class="label">For Tax Accountant</div>
+      <h1>経理フローの変更について<br>（税理士向けご説明）</h1>
+      <div class="meta">
+        <span><strong>作成：</strong>2026-05-04</span>
+        <span><strong>作成者：</strong>株式会社Entime 寺山 大夢</span>
+        <span><strong>適用：</strong>2026年5月分（試運用）／6月分（本運用）</span>
+      </div>
+    </header>
+
+    <section class="block">
+      <h2><span class="num">1</span>一番大きな変化（3点）</h2>
+      <div class="change-cards">
+        <div class="change-card">
+          <div class="icon">01</div>
+          <h4>現金領収書がMF Boxに自動集約</h4>
+          <div class="ba">
+            <span class="old">紙で月末まとめて受け渡し</span><br>
+            <span class="new">→ iPhone1タップ撮影で自動アップロード</span>
+          </div>
+        </div>
+        <div class="change-card">
+          <div class="icon">02</div>
+          <h4>CSV→エクセル→PDF添付 が消滅</h4>
+          <div class="ba">
+            <span class="old">弊社が月次出力＋送付</span><br>
+            <span class="new">→ MF会計に直接ログインしてご確認</span>
+          </div>
+        </div>
+        <div class="change-card">
+          <div class="icon">03</div>
+          <h4>電帳法対応がMF側で完結</h4>
+          <div class="ba">
+            <span class="old">Lark Drive＋紙保管で個別対応</span><br>
+            <span class="new">→ MF Boxの保存機能で自動対応</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2><span class="num">2</span>フローの変化（Before → After）</h2>
+      <p style="margin-bottom:1rem; color: var(--text-muted);">旧運用12ステップが、新運用では大幅に簡素化されます。</p>
+
+      <div class="flow-comparison">
+        <div class="flow-col old">
+          <div class="col-header">▼ Before（旧運用）</div>
+
+          <div class="flow-section-label">大夢社長の作業</div>
+          <div class="flow-step"><span class="num">①</span>領収書受領（紙）</div>
+          <div class="flow-step"><span class="num">②</span>月末までデスクで保管</div>
+          <div class="flow-step"><span class="num">③</span>MF会計からCSV出力</div>
+          <div class="flow-step"><span class="num">④</span>領収書をPDFスキャン</div>
+          <div class="flow-step"><span class="num">⑤</span>CSV＋PDFをエクセル整理</div>
+          <div class="flow-step"><span class="num">⑥</span>先生にメール送付</div>
+
+          <div class="flow-section-label">先生の作業（月末）</div>
+          <div class="flow-step"><span class="num">⑦</span>メールから資料DL</div>
+          <div class="flow-step"><span class="num">⑧</span>MF会計にログイン</div>
+          <div class="flow-step"><span class="num">⑨</span>CSVと領収書を見て<br><strong>手入力で仕訳作成</strong></div>
+          <div class="flow-step"><span class="num">⑩</span>仕訳確定</div>
+
+          <div class="flow-section-label">電帳法対応</div>
+          <div class="flow-step"><span class="num">⑪</span>Lark Driveに保管</div>
+          <div class="flow-step"><span class="num">⑫</span>紙の領収書も保管</div>
+        </div>
+
+        <div class="arrow-mid">→</div>
+
+        <div class="flow-col new">
+          <div class="col-header">▼ After（新運用）</div>
+
+          <div class="flow-section-label">大夢社長の作業（リアルタイム）</div>
+          <div class="flow-step"><span class="num">①</span>領収書受領</div>
+          <div class="flow-step"><span class="num">②</span>iPhoneで1タップ撮影</div>
+          <div class="flow-step"><span class="num">③</span>自動でMF Boxへアップ<br><small style="opacity:0.8">電帳法タイムスタンプ自動付与</small></div>
+
+          <div class="flow-section-label">MF会計（自動連携・変更なし）</div>
+          <div class="flow-step kept">楽天銀行・宮崎銀行・Amex 自動連携</div>
+          <div class="flow-step"><strong>＋現金領収書がBox経由で集約</strong></div>
+
+          <div class="flow-section-label">先生の作業（月末・MF内で完結）</div>
+          <div class="flow-step"><span class="num">④</span>MF会計にログイン</div>
+          <div class="flow-step"><span class="num">⑤</span>「自動で仕訳→AI-OCRから入力」</div>
+          <div class="flow-step"><span class="num">⑥</span>Box内領収書がOCR済み</div>
+          <div class="flow-step upgraded"><span class="num">⑦</span>候補をワンクリック確定<br><small>(カード/銀行は既存明細に証憑紐付け)</small></div>
+          <div class="flow-step"><span class="num">⑧</span>完了</div>
+        </div>
+      </div>
+
+      <h3>ステップ単位の対応表</h3>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 30%;">旧運用</th>
+            <th style="width: 30%;">新運用</th>
+            <th style="width: 40%;">扱い</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>① 紙の領収書受領</td><td>① 同じ</td><td class="neutral">変更なし</td></tr>
+          <tr><td>② デスクで月末まで保管</td><td>—</td><td class="cross">廃止（即撮影）</td></tr>
+          <tr><td>③ CSV出力（弊社）</td><td>—</td><td class="cross">廃止（先生がMF直アクセス）</td></tr>
+          <tr><td>④ 領収書PDFスキャン</td><td>—</td><td class="cross">廃止（iPhone撮影に置換）</td></tr>
+          <tr><td>⑤⑥ CSV整理＋メール送付</td><td>—</td><td class="cross">廃止</td></tr>
+          <tr><td>⑦⑧ メールDL／MFログイン</td><td>④ ログインのみ</td><td class="neutral">簡素化</td></tr>
+          <tr><td>⑨ <strong>手入力で仕訳作成</strong></td><td>⑦ <strong class="new-label">AI-OCRワンクリック確定</strong></td><td class="check">✓ 大幅効率化</td></tr>
+          <tr><td>⑪ Lark Drive保管</td><td>—</td><td class="cross">廃止（MF Boxに統合）</td></tr>
+          <tr><td>⑫ 紙保管</td><td>△ 1ヶ月のみ任意保管</td><td class="neutral">縮小</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="block">
+      <h2><span class="num">3</span>領収書の処理パターン（先生にお願いしたい判断）</h2>
+      <p style="margin-bottom:1rem;">弊社（大夢社長）からは <strong>「全部撮って送る」</strong>方針です。判断は先生にお任せしたく、以下の整理表をご活用ください。</p>
+      <table>
+        <thead>
+          <tr>
+            <th>シーン</th>
+            <th>Boxに領収書</th>
+            <th>自動連携明細</th>
+            <th>処理</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>現金で飲食</td>
+            <td class="check">✓ あり</td>
+            <td class="cross">✕ なし</td>
+            <td><strong class="new-label">AI-OCRで新規仕訳作成</strong>（貸方＝現金）</td>
+          </tr>
+          <tr>
+            <td>カードで飲食</td>
+            <td class="check">✓ あり</td>
+            <td class="check">✓ Amex明細にあり</td>
+            <td>既存Amex明細に <strong>証憑を紐付け</strong>（重複作成しない）</td>
+          </tr>
+          <tr>
+            <td>銀行引落（家賃等）</td>
+            <td class="check">✓ あり（請求書等）</td>
+            <td class="check">✓ 銀行明細にあり</td>
+            <td>既存銀行明細に <strong>証憑を紐付け</strong></td>
+          </tr>
+          <tr>
+            <td>カード払い・領収書なし</td>
+            <td class="cross">✕ なし</td>
+            <td class="check">✓ Amex明細にあり</td>
+            <td>従来通りAmex明細から仕訳</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="block">
+      <h2><span class="num">4</span>旧運用 vs 新運用 比較</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 25%;">観点</th>
+            <th style="width: 35%;">旧運用</th>
+            <th style="width: 40%;">新運用</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>現金領収書の入口</strong></td><td>紙でお渡し or Lark入力</td><td class="check">iPhone撮影→MF Box自動送信</td></tr>
+          <tr><td><strong>証憑保管場所</strong></td><td>Lark Drive＋紙</td><td class="check">MF クラウドBox（一元化）</td></tr>
+          <tr><td><strong>CSV出力</strong></td><td>月次で弊社が出力＋送付</td><td class="check">不要（先生がMF直接ログイン）</td></tr>
+          <tr><td><strong>領収書のPDF化</strong></td><td>弊社で実施</td><td class="check">不要（撮影即アップロード）</td></tr>
+          <tr><td><strong>電帳法対応</strong></td><td>Lark＋紙で個別対応</td><td class="check">MF Boxで自動対応（タイムスタンプ）</td></tr>
+          <tr><td><strong>仕訳作成場所</strong></td><td>MF会計（先生）</td><td class="neutral">MF会計（先生）※変わらず</td></tr>
+          <tr><td><strong>仕訳確定の判断</strong></td><td>先生</td><td class="neutral">先生 ※変わらず</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="block">
+      <h2><span class="num">5</span>先生のメリット</h2>
+      <div class="merit-grid">
+        <div class="merit-card">
+          <h4><span class="check-icon">✓</span>領収書の物理受け渡しが不要</h4>
+          <p>紙の山を整理する作業がなくなります。</p>
+        </div>
+        <div class="merit-card">
+          <h4><span class="check-icon">✓</span>CSV往復作業が消滅</h4>
+          <p>MF会計のAI-OCR画面で「ワンクリック確定」or「明細に証憑紐付け」だけ。</p>
+        </div>
+        <div class="merit-card">
+          <h4><span class="check-icon">✓</span>電帳法の二重管理を解消</h4>
+          <p>MF Box内で電子取引データ保存の要件を自動的に満たすため、別途の保管対応が不要に。</p>
+        </div>
+        <div class="merit-card">
+          <h4><span class="check-icon">✓</span>月次決算の早期化</h4>
+          <p>弊社のCSV出力作業がなくなるため、月初の業務開始が早まります。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2><span class="num">6</span>ご対応をお願いしたい点</h2>
+      <div class="ask-grid">
+        <div class="ask-card">
+          <div class="step-num">A</div>
+          <h4>ログイン情報の確認</h4>
+          <p>MF会計に「アプリ連携権限を持つメンバー」として先生のアカウントを設定済みです。Box・クラウド会計の両方が見えるかご確認ください。</p>
+        </div>
+        <div class="ask-card">
+          <div class="step-num">B</div>
+          <h4>AI-OCR画面の操作確認</h4>
+          <p>「自動で仕訳→AI-OCRから入力」が新フローのメイン画面です。事前に画面の動きをご確認いただけると本運用がスムーズです。</p>
+        </div>
+        <div class="ask-card">
+          <div class="step-num">C</div>
+          <h4>5月実績で運用MTG</h4>
+          <p>2026年5月分の処理完了後、弊社と一度オンラインMTGをさせていただき、課題があれば運用調整したく存じます。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2><span class="num">7</span>移行スケジュール</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <h4>2026年5月（試運用）</h4>
+          <p>iPhoneショートカット運用開始。一部MF不具合あり → AI-OCR候補が出ない場合は従来通り手で仕訳作成可。</p>
+        </div>
+        <div class="timeline-item">
+          <h4>2026年6月（本運用）</h4>
+          <p>MF側の不具合解消後、AI-OCRワンクリック運用に完全移行。</p>
+        </div>
+        <div class="timeline-item">
+          <h4>2026年7月以降（拡張）</h4>
+          <p>弊社側で日次ダッシュボード（Lark Base）を構築予定。先生の業務には影響ありません。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2><span class="num">8</span>既知の課題（共有事項）</h2>
+      <div class="alert-box">
+        <h4>⚠ MF AI-OCRの一時的な不具合</h4>
+        <div class="quote">「クラウドBoxで証憑ファイルの授受区分を『発行』から『受領』に変更すると、一時的にAI-OCRの仕訳候補が正しく表示されない事象」（MF公式告知）</div>
+        <p>解消されるまでは、先生がMF Boxファイル一覧を直接見て仕訳を起こしていただく形になります。不具合解消後はAI-OCR候補から確定するだけになります。</p>
+      </div>
+      <div class="alert-box">
+        <h4>⚠ 月60件の仕訳登録上限</h4>
+        <p>現プランでは <strong>月60件まで</strong> がAI-OCR経由仕訳登録の上限です。60件を超える月が出てきた場合、プランアップを検討します（先生にもご相談します）。</p>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2><span class="num">9</span>ご質問・ご相談先</h2>
+      <div class="contact-table">
+        <div class="contact-row">
+          <span class="label">本資料に関するご質問</span>
+          <span>寺山 大夢（info@miyazaki-entime.jp）</span>
+        </div>
+        <div class="contact-row">
+          <span class="label">MFアカウントの不具合</span>
+          <span>寺山 大夢 → 弊社からMFサポートへエスカレーション</span>
+        </div>
+        <div class="contact-row">
+          <span class="label">仕訳判断の確認</span>
+          <span>従来通り、先生からのご質問にお答えします</span>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="company">株式会社Entime</div>
+      <div>代表取締役 寺山 大夢</div>
+    </footer>
+
+  </div>
+</body>
+</html>
