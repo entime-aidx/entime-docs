@@ -2,7 +2,7 @@
 
 株式会社Entime 社内ドキュメント公開リポジトリ。
 
-公開URL: https://docs.miyazaki-entime.jp
+公開URL: https://docs.entime.jp
 
 ## 目的
 
@@ -13,7 +13,7 @@
 
 | ドキュメント | URL |
 |---|---|
-| 経理フロー変更案内（税理士向け） | https://docs.miyazaki-entime.jp/keiri-flow-tax-accountant.html |
+| 経理フロー変更案内（税理士向け） | https://docs.entime.jp/keiri-flow-tax-accountant.html |
 
 ## 更新フロー
 
@@ -33,7 +33,7 @@ git push origin main
 
 - ホスティング: GitHub Pages (entime-aidx/entime-docs)
 - DNS: Cloudflare
-- 独自ドメイン: docs.miyazaki-entime.jp
+- 独自ドメイン: docs.entime.jp
 
 ## ディレクトリ
 
